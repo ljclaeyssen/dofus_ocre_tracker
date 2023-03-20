@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {TrackerComponent} from "./pages/tracker/tracker.component";
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () =>
-      import('./pages/tracker/tracker.module')
-        .then(m => m.TrackerModule),
+    path: 'hunt',
+    component: TrackerComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'hunt',
   }
 ];
 
