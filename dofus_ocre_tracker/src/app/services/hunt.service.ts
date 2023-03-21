@@ -25,7 +25,7 @@ export class HuntService {
 
   declareCaught(key: HUNT_KEY, elementCaught: HuntItem): Hunt {
     const hunt = this.localStorage.read<Hunt>(key);
-    hunt.uncaught = hunt.uncaught.splice(hunt.uncaught.findIndex(item => item.name === elementCaught.name))
+    hunt.uncaught.splice(hunt.uncaught.findIndex(item => item.name === elementCaught.name),1)
     hunt.caught.push(elementCaught);
     this.localStorage.write(key, hunt);
     return hunt;
@@ -33,7 +33,7 @@ export class HuntService {
 
   declareUnCaught(key: HUNT_KEY, elementCaught: HuntItem): Hunt {
     const hunt = this.localStorage.read<Hunt>(key);
-    hunt.caught = hunt.caught.splice(hunt.caught.findIndex(item => item.name === elementCaught.name))
+    hunt.caught.splice(hunt.caught.findIndex(item => item.name === elementCaught.name),1)
     hunt.uncaught.push(elementCaught);
     this.localStorage.write(key, hunt);
     return hunt;

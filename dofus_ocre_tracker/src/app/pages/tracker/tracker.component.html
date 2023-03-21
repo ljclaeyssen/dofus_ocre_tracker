@@ -2,16 +2,16 @@
   <mat-tab
     label="Monstres"
   >
-    <app-monsters></app-monsters>
+    <app-monsters [huntType]="huntTypes.MONSTERS_HUNT_KEY"></app-monsters>
   </mat-tab>
   <mat-tab
     label="Archimonstres"
   >
-    <app-archis></app-archis>
+    <app-monsters [huntType]="huntTypes.ARCHIS_HUNT_KEY"></app-monsters>
   </mat-tab>
   <mat-tab
     label="Boss de donjons"
   >
-    <app-bosses></app-bosses>
+    <app-monsters [huntType]="huntTypes.BOSSES_HUNT_KEY"></app-monsters>
   </mat-tab>
 </mat-tab-group>
