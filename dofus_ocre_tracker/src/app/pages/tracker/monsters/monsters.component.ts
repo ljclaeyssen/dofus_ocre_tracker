@@ -31,6 +31,7 @@ export class MonstersComponent implements OnInit {
 
   public refreshSearch(searchValue: string): void {
     const everyCatchable = this.hunt?.uncaught as HuntItem[];
+    this.searchField = searchValue;
     if (searchValue) {
       this.catchable = everyCatchable.filter((element) => element.name.toLowerCase().includes(searchValue.toLowerCase()));
     } else {
@@ -40,10 +41,12 @@ export class MonstersComponent implements OnInit {
 
   public catch(item: HuntItem): void {
     this.hunt = this.huntService.declareCaught(this.huntType, item);
+    this.refreshSearch(this.searchField);
   }
 
   public release(item: HuntItem): void {
     this.hunt = this.huntService.declareUnCaught(this.huntType, item);
+    this.refreshSearch(this.searchField);
   }
 
 }
