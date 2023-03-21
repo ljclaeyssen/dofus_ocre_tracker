@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import {LocalStorageService} from "./local-storage.service";
-import {Hunt} from "./hunt";
-import {ARCHIS_HUNT_KEY, BOSSES_HUNT_KEY, MONSTERS_HUNT_KEY} from "../constants/storage-keys";
+import {Hunt} from "../models/hunt";
+import {HUNT_KEY} from "../constants/storage-keys";
+import {archis} from "../constants/archis";
+import {convertRawDataToHuntItem} from "../helpers/hunt-items-helper";
+import {bosses} from "../constants/bosses";
+import {monsters} from "../constants/monsters";
 
 @Injectable({
   providedIn: 'root'
@@ -12,35 +16,39 @@ export class InitHuntService {
   ) { }
 
   public initHunt(): void {
-    this.initMonsters();
-    this.initBosses();
-    this.initArchis();
-  }
-
-  public initMonsters(): void {
     const newHunt: Hunt = {
       caught: [],
       uncaught: [],
     }
-    this.localStorage.delete(MONSTERS_HUNT_KEY);
-    this.localStorage.write(MONSTERS_HUNT_KEY, newHunt);
+    this.localStorage.delete(HUNT_KEY.MONSTERS_HUNT_KEY);
+    this.localStorage.write(HUNT_KEY.MONSTERS_HUNT_KEY, newHunt);
+    this.localStorage.delete(HUNT_KEY.BOSSES_HUNT_KEY);
+    this.localStorage.write(HUNT_KEY.BOSSES_HUNT_KEY, newHunt);
+    this.localStorage.delete(HUNT_KEY.ARCHIS_HUNT_KEY);
+    this.localStorage.write(HUNT_KEY.ARCHIS_HUNT_KEY, newHunt);
   }
 
-  public initBosses(): void {
+  public initHuntStep(key: HUNT_KEY): Hunt {
     const newHunt: Hunt = {
       caught: [],
       uncaught: [],
     }
-    this.localStorage.delete(BOSSES_HUNT_KEY);
-    this.localStorage.write(BOSSES_HUNT_KEY, newHunt);
-  }
-
-  public initArchis(): void {
-    const newHunt: Hunt = {
-      caught: [],
-      uncaught: [],
+    switch (key) {
+      case HUNT_KEY.ARCHIS_HUNT_KEY:
+        newHunt.uncaught = convertRawDataToHuntItem(archis);
+        newHunt.caught = convertRawDataToHuntItem(archis);
+        break;
+      case HUNT_KEY.BOSSES_HUNT_KEY:
+        newHunt.uncaught = convertRawDataToHuntItem(bosses);
+        newHunt.caught = convertRawDataToHuntItem(bosses);
+        break;
+      case HUNT_KEY.MONSTERS_HUNT_KEY:
+        newHunt.uncaught = convertRawDataToHuntItem(monsters);
+        newHunt.caught = convertRawDataToHuntItem(monsters);
+        break;
     }
-    this.localStorage.delete(ARCHIS_HUNT_KEY);
-    this.localStorage.write(ARCHIS_HUNT_KEY, newHunt);
+    this.localStorage.delete(key);
+    this.localStorage.write(key, newHunt);
+    return newHunt;
   }
 }

@@ -1,4 +1,4 @@
-import {HuntItem} from "../models/hunt-item";
+import {HuntItem} from "./hunt-item";
 
 export interface Hunt {
   uncaught: HuntItem[];

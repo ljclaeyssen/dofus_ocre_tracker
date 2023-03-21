@@ -1,1 +1,30 @@
-<p>monsters works!</p>
+<mat-accordion>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        A Capturer !
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container">
+      <app-hunt-item
+        *ngFor="let item of hunt?.uncaught"
+        [huntItem]="item"
+        [isCaught]="false"
+      ></app-hunt-item>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Déjà capturés
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container">
+      <app-hunt-item
+        *ngFor="let item of hunt?.caught"
+        [huntItem]="item"
+        [isCaught]="true"
+      ></app-hunt-item>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

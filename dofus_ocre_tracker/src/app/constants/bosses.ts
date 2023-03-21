@@ -1,4 +1,4 @@
-export const boss = [
+export const bosses = [
   'Mob l\'Éponge',
   'Bouftou Royal',
   'Tournesol Affamé',
