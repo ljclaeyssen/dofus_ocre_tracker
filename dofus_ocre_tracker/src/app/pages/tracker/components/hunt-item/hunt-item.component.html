@@ -1,0 +1,13 @@
+<mat-checkbox
+  (click)="checkedItem.emit(huntItem)"
+  [checked]="isCaught"
+>
+  <div class="item-container">
+    <div class="item-name">
+      {{ itemName }}
+    </div>
+    <div class="item-location">
+      {{itemLocation}}
+    </div>
+  </div>
+</mat-checkbox>
